@@ -1,11 +1,9 @@
 name: "Add jar to Release"
 description: "Add a jar file to a Github Release"
 inputs:
-  jar-name:
-outputs:
   jar-path:
-    description: "path of the built jar file"
-    value: ${{ steps.build-step.outputs.jar-path }}
+    required: true
+    description: "Path of the jar file"
 runs:
   using: "composite"
   steps:
