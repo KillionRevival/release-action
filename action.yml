@@ -1,0 +1,18 @@
+name: "Add jar to Release"
+description: "Add a jar file to a Github Release"
+inputs:
+  jar-name:
+outputs:
+  jar-path:
+    description: "path of the built jar file"
+    value: ${{ steps.build-step.outputs.jar-path }}
+runs:
+  using: "composite"
+  steps:
+    - name: Upload Release Asset
+      run: |
+        cd ${{github.workspace}}
+        gh release upload ${{github.event.release.tag_name}} ${{ inputs.jar-path }}
+      env:
+        GITHUB_TOKEN: ${{ github.TOKEN }}
+      shell: bash
